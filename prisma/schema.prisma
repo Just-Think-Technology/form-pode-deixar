@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url e directUrl ficam em prisma.config.ts (Prisma 7)
+}
+
+model ClientResponse {
+  id String @id @default(cuid())
+
+  hiredBefore String
+
+  services      Json?
+  servicesOther String?
+
+  searchChannels      Json?
+  searchChannelsOther String?
+
+  mainDifficulty      String?
+  mainDifficultyOther String?
+
+  decisionFactors      Json?
+  decisionFactorsOther String?
+
+  hadProblem         Boolean?
+  problemTypes       Json?
+  problemTypesOther  String?
+
+  howGetsQuote             String?
+  howGetsQuoteOther        String?
+  professionalsConsulted   String?
+  proposalsUsefulness      String?
+
+  paymentMethods          Json?
+  paymentMethodsOther     String?
+  platformPaymentSafer    String?
+
+  looksForReviews  String?
+  reviewsInfluence Int?
+
+  lastExperience String?
+
+  solutionUsefulness     Int?
+  wouldUseReasons        Json?
+  wouldUseReasonsOther   String?
+  wouldNotUse            String?
+  wouldPayFee            String?
+
+  ageRange      String?
+  cityState     String?
+  hireFrequency String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([hiredBefore])
+  @@map("client_responses")
+}
+
+model ProviderResponse {
+  id String @id @default(cuid())
+
+  workType String
+
+  serviceOffered String?
+
+  clientAcquisition      Json?
+  clientAcquisitionOther String?
+
+  mainDifficulty      String?
+  mainDifficultyOther String?
+
+  sendsQuotes          String?
+  newClientsPerMonth   String?
+  wouldUsePlatform     String?
+  wouldPayCommission   String?
+  commissionModel      String?
+  commissionModelOther String?
+
+  ageRange  String?
+  cityState String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([workType])
+  @@map("provider_responses")
+}
